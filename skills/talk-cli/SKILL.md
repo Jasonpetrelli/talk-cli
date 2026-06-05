@@ -13,7 +13,7 @@ license: MIT
 ## 安装
 
 ```bash
-npm install -g talk-cli
+npm install -g @crystaldiyu/talk-cli
 ```
 
 本地开发调试：

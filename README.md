@@ -5,7 +5,7 @@
 ## 安装
 
 ```bash
-npm install -g talk-cli
+npm install -g @crystaldiyu/talk-cli
 ```
 
 ## 本地开发
@@ -27,3 +27,5 @@ talk schema --format json
 ```
 
 完整 Agent 调用说明见 [skills/talk-cli/SKILL.md](skills/talk-cli/SKILL.md)。
+
+小白使用和大模型接入指南见 [docs/USER_GUIDE.md](docs/USER_GUIDE.md)。
