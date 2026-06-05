@@ -1,6 +1,6 @@
 {
   "name": "@crystaldiyu/talk-cli",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "面向 Agent 语义调用的对话 CLI demo",
   "type": "module",
   "bin": {

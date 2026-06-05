@@ -6,20 +6,26 @@ const schema = {
     {
       name: 'talk ask <message>',
       description: '发送自然语言对话，返回 demo 回复',
-      options: ['--scenario default|project|qa', '--format text|json'],
-      agentUsage: 'talk ask "查一下项目状态" --scenario project --format json',
+      options: ['--scenario default|project|qa|order', '--format text|json'],
+      agentUsage: 'talk-cli ask "查询我的订单" --format json',
     },
     {
-      name: 'talk demo list',
+      name: 'talk-cli order list',
+      description: '查询订单列表 demo',
+      options: ['--format text|json'],
+      agentUsage: 'talk-cli order list --format json',
+    },
+    {
+      name: 'talk-cli demo list',
       description: '列出内置 demo 场景',
       options: ['--format text|json'],
-      agentUsage: 'talk demo list --format json',
+      agentUsage: 'talk-cli demo list --format json',
     },
     {
-      name: 'talk demo run [scenario]',
+      name: 'talk-cli demo run [scenario]',
       description: '运行内置 demo 场景',
       options: ['--format text|json'],
-      agentUsage: 'talk demo run qa --format json',
+      agentUsage: 'talk-cli demo run qa --format json',
     },
   ],
 };

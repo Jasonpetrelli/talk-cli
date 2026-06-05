@@ -31,6 +31,7 @@ talk-cli ask "查一下项目状态"
 ```bash
 talk-cli ask "查一下项目状态" --scenario project
 talk-cli ask "回答一个问题" --scenario qa
+talk-cli ask "查询我的订单"
 ```
 
 查看有哪些 demo：
@@ -45,12 +46,30 @@ talk-cli demo list
 talk-cli demo run qa
 ```
 
+查询订单列表 demo：
+
+```bash
+talk-cli order list
+```
+
 ## 3. 大模型应该怎么调用
 
 大模型不要解析普通文本，建议固定使用 JSON 输出：
 
 ```bash
 talk-cli ask "查一下项目状态" --scenario project --format json
+```
+
+查询订单时建议这样调用：
+
+```bash
+talk-cli order list --format json
+```
+
+也可以直接通过自然语言触发订单场景：
+
+```bash
+talk-cli ask "查询我的订单" --format json
 ```
 
 返回结构大概是：
@@ -81,6 +100,7 @@ talk-cli ask "查一下项目状态" --scenario project --format json
 
 - `data.reply`：最终回复内容
 - `data.scenario`：当前场景
+- `data.ui.rows`：订单列表等页面数据
 - `data.nextActions`：后续建议动作
 
 ## 4. Claude 里怎么接入
@@ -132,11 +152,15 @@ Skill 的作用不是替代 npm 包，而是告诉大模型：
 当用户需要使用 Talk CLI 查询或对话时，执行：
 talk-cli ask "<用户问题>" --format json
 
+当用户要查询订单时，优先执行：
+talk-cli order list --format json
+
 如果能判断业务场景，可以加：
 --scenario project
 --scenario qa
+--scenario order
 
-读取返回 JSON 的 data.reply 作为最终回答。
+读取返回 JSON 的 data.reply 作为最终回答；如果返回 data.ui.rows，则按列表展示给用户。
 不要解析普通文本输出，默认使用 --format json。
 ```
 

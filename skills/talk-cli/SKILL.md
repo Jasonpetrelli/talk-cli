@@ -1,14 +1,14 @@
 ---
 name: talk-cli
 version: 0.1.0
-description: Use talk-cli to run semantic demo conversations from other agents. Trigger when the user asks to call talk-cli, run demo conversations, or query future talk service answers through the CLI.
+description: Use talk-cli to run semantic demo conversations and order list demos from other agents. Trigger when the user asks to call talk-cli, run demo conversations, query demo orders, or query future talk service answers through the CLI.
 author: jeson
 license: MIT
 ---
 
 # Talk CLI
 
-`talk-cli` 是一个面向 Agent 语义调用的对话 CLI。命令名 `talk`。
+`talk-cli` 是一个面向 Agent 语义调用的对话 CLI。优先使用命令名 `talk-cli`。
 
 ## 安装
 
@@ -29,10 +29,12 @@ node dist/cli.js ask "查一下项目状态" --format json
 Agent 默认使用 `--format json`，便于稳定解析结果。
 
 ```bash
-talk ask "查一下项目状态" --scenario project --format json
-talk demo list --format json
-talk demo run qa --format json
-talk schema --format json
+talk-cli ask "查一下项目状态" --scenario project --format json
+talk-cli ask "查询我的订单" --format json
+talk-cli order list --format json
+talk-cli demo list --format json
+talk-cli demo run qa --format json
+talk-cli schema --format json
 ```
 
 ## 命令
@@ -40,15 +42,25 @@ talk schema --format json
 ### ask
 
 ```bash
-talk ask <message> [--scenario default|project|qa] [--format text|json]
+talk-cli ask <message> [--scenario default|project|qa|order] [--format text|json]
 ```
 
 发送一段自然语言对话并返回回复。当前是 demo 回复，后续服务层会接入真实接口查询。
 
+当 message 包含“订单”或 `order` 时，会自动返回订单列表 demo，JSON 结果在 `data.ui.rows`。
+
+### order list
+
+```bash
+talk-cli order list --format json
+```
+
+返回订单列表 demo。Agent 读取 `data.rows` 渲染列表，读取 `data.pagination` 获取分页信息。
+
 ### demo list
 
 ```bash
-talk demo list --format json
+talk-cli demo list --format json
 ```
 
 列出内置 demo 场景。
@@ -56,7 +68,7 @@ talk demo list --format json
 ### demo run
 
 ```bash
-talk demo run [scenario] --format json
+talk-cli demo run [scenario] --format json
 ```
 
 运行指定内置 demo 场景。
@@ -64,7 +76,7 @@ talk demo run [scenario] --format json
 ### schema
 
 ```bash
-talk schema --format json
+talk-cli schema --format json
 ```
 
 输出供 Agent 读取的 CLI 语义调用说明。

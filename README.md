@@ -24,6 +24,8 @@ node dist/cli.js ask "查一下项目状态" --format json
 ```bash
 talk-cli ask "你好" --format json
 talk-cli ask "查一下项目状态" --scenario project --format json
+talk-cli ask "查询我的订单" --format json
+talk-cli order list --format json
 talk-cli demo list --format json
 talk-cli demo run qa --format json
 talk-cli schema --format json

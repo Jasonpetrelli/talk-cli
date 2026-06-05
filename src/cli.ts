@@ -1,6 +1,7 @@
 import { Command } from 'commander';
 import { registerAsk } from './commands/ask';
 import { registerDemo } from './commands/demo';
+import { registerOrder } from './commands/order';
 import { registerSchema } from './commands/schema';
 import { version } from './core/version';
 
@@ -14,6 +15,7 @@ program.showHelpAfterError();
 
 registerAsk(program);
 registerDemo(program);
+registerOrder(program);
 registerSchema(program);
 
 try {
