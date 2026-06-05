@@ -1,4 +1,5 @@
 import { Command } from 'commander';
+import { renderOrderList } from '../services/orders';
 import { askTalk } from '../services/talk';
 import { parseFormat, output, outputError } from '../utils/output';
 import { readStdin } from '../utils/stdin';
@@ -24,7 +25,10 @@ export function registerAsk(program: Command): void {
       if (format === 'json') {
         output('talk.ask', data, format);
       } else {
-        output('talk.ask', data.reply, format);
+        const text = data.ui?.type === 'list'
+          ? `${data.reply}\n\n${renderOrderList(data.ui)}`
+          : data.reply;
+        output('talk.ask', text, format);
       }
     });
 }

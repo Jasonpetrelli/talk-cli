@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import { getDemoOrderList } from '../services/orders';
+import { getDemoOrderList, renderOrderList } from '../services/orders';
 import { parseFormat, output } from '../utils/output';
 
 export function registerOrder(program: Command): void {
@@ -20,11 +20,4 @@ export function registerOrder(program: Command): void {
 
       output('talk.order.list', renderOrderList(data), format);
     });
-}
-
-function renderOrderList(data: ReturnType<typeof getDemoOrderList>): string {
-  return [
-    data.title,
-    ...data.rows.map(order => `${order.orderNo} | ${order.status} | ${order.amount} | ${order.title} | ${order.action}`),
-  ].join('\n');
 }

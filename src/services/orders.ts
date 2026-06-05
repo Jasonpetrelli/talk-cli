@@ -64,3 +64,10 @@ export function getDemoOrderList(): OrderListView {
     emptyText: '暂无订单',
   };
 }
+
+export function renderOrderList(data: OrderListView): string {
+  return [
+    data.title,
+    ...data.rows.map(order => `${order.orderNo} | ${order.status} | ${order.amount} | ${order.title} | ${order.action}`),
+  ].join('\n');
+}
